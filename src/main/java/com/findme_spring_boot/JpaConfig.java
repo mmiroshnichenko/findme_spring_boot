@@ -1,4 +1,4 @@
-package com.findme_spring_boot.config;
+package com.findme_spring_boot;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

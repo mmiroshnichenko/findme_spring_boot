@@ -4,9 +4,10 @@ import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.ForbiddenException;
 import com.findme_spring_boot.exception.NotFoundException;
 import com.findme_spring_boot.helper.ArgumentHelper;
-import com.findme_spring_boot.helper.AuthHelper;
 import com.findme_spring_boot.models.User;
 import com.findme_spring_boot.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,19 +23,19 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     private UserService userService;
     private ArgumentHelper argumentHelper;
-    private AuthHelper authHelper;
+
+    private static final Logger userLogger = LogManager.getLogger(UserController.class);
+
 
     @Autowired
-    public UserController(UserService userService, ArgumentHelper argumentHelper, AuthHelper authHelper) {
+    public UserController(UserService userService, ArgumentHelper argumentHelper) {
         this.userService = userService;
         this.argumentHelper = argumentHelper;
-        this.authHelper = authHelper;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/user/update", consumes = "application/json")
-    public ResponseEntity<String> update(HttpSession session, @RequestBody User user) {
+    public ResponseEntity<String> update(@RequestBody User user) {
         try {
-            authHelper.checkAuthentication(session);
             userService.update(user);
             return new ResponseEntity<String>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
@@ -49,9 +50,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/user/delete/{userId}")
-    public ResponseEntity<String> delete(HttpSession session, @PathVariable String userId) {
+    public ResponseEntity<String> delete(@PathVariable String userId) {
         try {
-            authHelper.checkAuthentication(session);
             userService.delete(argumentHelper.parseLongArgument(userId));
             return new ResponseEntity<String>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
@@ -66,9 +66,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/user/{userId}", produces = "text/plain")
-    public String get(HttpSession session, Model model, @PathVariable String userId) {
+    public String get(Model model, @PathVariable String userId) {
         try {
-            authHelper.checkAuthentication(session);
             model.addAttribute("user", userService.findById(argumentHelper.parseLongArgument(userId)));
             return "profile";
         } catch (NotFoundException e) {
@@ -90,6 +89,7 @@ public class UserController {
     public ResponseEntity<String> registerUser(@ModelAttribute User user) {
         try {
             userService.save(user);
+            userLogger.info("User with id: " + user.getId() + " was registered");
             return new ResponseEntity<String>("ok", HttpStatus.OK);
         } catch (BadRequestException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -112,10 +112,13 @@ public class UserController {
             headers.add("Location", "/user/" + user.getId());
             return new ResponseEntity<String>(headers, HttpStatus.OK);
         } catch (BadRequestException e) {
+            userLogger.error(e.getMessage());
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (ForbiddenException e) {
+            userLogger.error(e.getMessage());
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
         } catch (Exception e) {
+            userLogger.error(e.getMessage());
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -123,13 +126,10 @@ public class UserController {
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     public ResponseEntity<String> logout(HttpSession session) {
         try {
-            authHelper.checkAuthentication(session);
             session.invalidate();
             HttpHeaders headers = new HttpHeaders();
             headers.add("Location", "/login");
             return new ResponseEntity<String>(headers, HttpStatus.OK);
-        } catch (ForbiddenException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

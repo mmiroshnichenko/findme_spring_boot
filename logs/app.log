@@ -1,0 +1,22 @@
+2019-11-06 14:24:12,833 INFO c.f.c.UserController [http-nio-8080-exec-7] User with id: 2 was registered
+2019-11-06 14:33:39,431 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 7732 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-06 14:33:39,439 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-06 14:33:39,440 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-06 14:33:50,728 INFO o.s.b.StartupInfoLogger [main] Started Application in 11.662 seconds (JVM running for 13.077)
+2019-11-06 14:34:20,138 ERROR c.f.c.UserController [http-nio-8080-exec-2] Error: email or password is incorrect
+2019-11-06 14:46:13,078 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 16840 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-06 14:46:13,085 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-06 14:46:13,086 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-06 14:46:24,270 INFO o.s.b.StartupInfoLogger [main] Started Application in 11.531 seconds (JVM running for 12.977)
+2019-11-06 14:46:49,037 INFO c.f.c.UserController [http-nio-8080-exec-3] User with id: 1 was registered
+2019-11-06 14:47:10,461 INFO c.f.c.UserController [http-nio-8080-exec-6] User with id: 2 was registered
+2019-11-06 14:49:19,594 INFO c.f.c.RelationshipController [http-nio-8080-exec-10] New relationship:
+2019-11-06 14:51:59,996 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 16076 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-06 14:52:00,003 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-06 14:52:00,003 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-06 14:52:10,422 INFO o.s.b.StartupInfoLogger [main] Started Application in 10.752 seconds (JVM running for 11.96)
+2019-11-06 14:52:28,183 ERROR c.f.c.UserController [http-nio-8080-exec-1] Error: email or password is incorrect
+2019-11-06 14:53:16,888 INFO c.f.c.UserController [http-nio-8080-exec-4] User with id: 1 was registered
+2019-11-06 14:53:33,750 INFO c.f.c.UserController [http-nio-8080-exec-8] User with id: 2 was registered
+2019-11-06 14:54:08,378 INFO c.f.c.RelationshipController [http-nio-8080-exec-3] New relationship:Relationship(id=1, userFrom=User{id=1, firstName='null', lastName='null', phone='null', country='null', city='null', age=null}, userTo=User{id=2, firstName='null', lastName='null', phone='null', country='null', city='null', age=null}, relationshipStatus=REQUESTED, dateModify=Wed Nov 06 14:54:07 EET 2019)
+2019-11-06 14:55:11,693 INFO c.f.c.RelationshipController [http-nio-8080-exec-6] Updated relationship:Relationship(id=1, userFrom=User{id=1, firstName='null', lastName='null', phone='null', country='null', city='null', age=null}, userTo=User{id=2, firstName='null', lastName='null', phone='null', country='null', city='null', age=null}, relationshipStatus=CONFIRMED, dateModify=Wed Nov 06 14:55:11 EET 2019)

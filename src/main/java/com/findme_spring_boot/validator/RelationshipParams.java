@@ -1,4 +1,4 @@
-package com.findme_spring_boot.validator.relationship;
+package com.findme_spring_boot.validator;
 
 import com.findme_spring_boot.models.RelationshipStatus;
 import lombok.Builder;

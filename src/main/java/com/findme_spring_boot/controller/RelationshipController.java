@@ -4,16 +4,16 @@ import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.ForbiddenException;
 import com.findme_spring_boot.exception.NotFoundException;
 import com.findme_spring_boot.helper.ArgumentHelper;
-import com.findme_spring_boot.helper.AuthHelper;
 import com.findme_spring_boot.models.Relationship;
 import com.findme_spring_boot.models.User;
 import com.findme_spring_boot.service.RelationshipService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,20 +25,20 @@ import java.util.List;
 public class RelationshipController {
     private RelationshipService relationshipService;
     private ArgumentHelper argumentHelper;
-    private AuthHelper authHelper;
+
+    private static final Logger relationshipLogger = LogManager.getLogger(RelationshipController.class);
 
     @Autowired
-    public RelationshipController(RelationshipService relationshipService, ArgumentHelper argumentHelper, AuthHelper authHelper) {
+    public RelationshipController(RelationshipService relationshipService, ArgumentHelper argumentHelper) {
         this.relationshipService = relationshipService;
         this.argumentHelper = argumentHelper;
-        this.authHelper = authHelper;
     }
 
     @RequestMapping(path = "/relationship/add", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> addRelationship(HttpSession session, @RequestBody Relationship relationship) {
         try {
-            relationshipService.addRelationship(relationship, authHelper.getAuthUser(session));
-
+            relationshipService.addRelationship(relationship, (User) session.getAttribute("USER"));
+            relationshipLogger.info("New relationship:" + relationship.toString());
             return new ResponseEntity<String>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -55,7 +55,7 @@ public class RelationshipController {
     public ResponseEntity<String> updateRelationship(HttpSession session, @RequestBody Relationship relationship) {
         try {
             relationshipService.updateRelationship(relationship);
-
+            relationshipLogger.info("Updated relationship:" + relationship.toString());
             return new ResponseEntity<String>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -71,7 +71,7 @@ public class RelationshipController {
     @RequestMapping(method = RequestMethod.GET, value = "/relationship/requests/income", produces = "text/plain")
     public String getIncomeRequests(HttpSession session, Model model) {
         try {
-            List<Relationship> incomeRequests = relationshipService.getIncomeRequests(authHelper.getAuthUser(session).getId());
+            List<Relationship> incomeRequests = relationshipService.getIncomeRequests((User) session.getAttribute("USER"));
             model.addAttribute("incomeRequests", incomeRequests);
 
             return "incomeRequests";
@@ -93,7 +93,7 @@ public class RelationshipController {
     @RequestMapping(method = RequestMethod.GET, value = "/relationship/requests/outcome", produces = "text/plain")
     public String getOutcomeRequests(HttpSession session, Model model) {
         try {
-            List<Relationship> outcomeRequests = relationshipService.getOutcomeRequests(authHelper.getAuthUser(session).getId());
+            List<Relationship> outcomeRequests = relationshipService.getOutcomeRequests((User) session.getAttribute("USER"));
             model.addAttribute("outcomeRequests", outcomeRequests);
 
             return "incomeRequests";

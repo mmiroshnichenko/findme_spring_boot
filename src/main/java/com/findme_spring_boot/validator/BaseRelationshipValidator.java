@@ -1,8 +1,6 @@
-package com.findme_spring_boot.validator.relationship;
+package com.findme_spring_boot.validator;
 
 import com.findme_spring_boot.exception.BadRequestException;
-
-import java.util.List;
 
 public abstract class BaseRelationshipValidator {
     private BaseRelationshipValidator next;

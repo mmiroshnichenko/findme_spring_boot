@@ -1,0 +1,27 @@
+<Configuration status="DEBUG">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <File name="File" fileName="c:/Users/miroshnichenko/IdeaProjects/findme_spring_boot/logs/app.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+        </File>
+        <File name="ErrorFile" fileName="c:/Users/miroshnichenko/IdeaProjects/findme_spring_boot/logs/error.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <!-- avoid duplicated logs with additivity=false -->
+        <Logger name="com.findme_spring_boot" level="debug" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="ErrorFile"/>
+            <AppenderRef ref="LogToConsole"/>
+        </Root>
+    </Loggers>
+</Configuration>
