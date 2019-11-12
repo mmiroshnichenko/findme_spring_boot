@@ -37,6 +37,7 @@ public class UserController {
     public ResponseEntity<String> update(@RequestBody User user) {
         try {
             userService.update(user);
+            //TODO String can be deleted from generics here, as java see your type
             return new ResponseEntity<String>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -109,6 +110,7 @@ public class UserController {
             User user = userService.login(request.getParameter("email"), request.getParameter("password"));
             session.setAttribute("USER", user);
             HttpHeaders headers = new HttpHeaders();
+            //TODO why do you need header here?
             headers.add("Location", "/user/" + user.getId());
             return new ResponseEntity<String>(headers, HttpStatus.OK);
         } catch (BadRequestException e) {

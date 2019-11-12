@@ -30,6 +30,9 @@ public class RelationshipDAO extends BaseDAO<Relationship> {
     private static final String FIND_COUNT_FRIENDS = "SELECT COUNT(*) FROM RELATIONSHIP " +
             "WHERE (USER_FROM_ID = ?1 OR USER_TO_ID = ?1) AND STATUS = ?2";
 
+
+    //TODO error handling missed as well
+
     public RelationshipDAO() {
         super(Relationship.class);
     }

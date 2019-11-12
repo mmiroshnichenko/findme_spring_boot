@@ -16,6 +16,7 @@ public class BaseDAO <T> {
         this.typeOfT = typeOfT;
     }
 
+    //TODO where is error handling?? it is super important, I wrote about that before
     public T save(T object) {
         entityManager.persist(object);
 

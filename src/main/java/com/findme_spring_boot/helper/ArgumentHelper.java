@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArgumentHelper {
+    //TODO такую простую логику не стоит выносить в отдельный класс, это простая валидация которая на уровне сервиса должны лежать
     public Long parseLongArgument(String id) throws BadRequestException {
         try {
             long paramId = Long.parseLong(id);
