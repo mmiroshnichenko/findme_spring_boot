@@ -1,9 +1,9 @@
 package com.findme_spring_boot.service;
 
-import com.findme_spring_boot.dao.MessageDAO;
+import com.findme_spring_boot.oracle.dao.MessageDAO;
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.NotFoundException;
-import com.findme_spring_boot.models.Message;
+import com.findme_spring_boot.oracle.models.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

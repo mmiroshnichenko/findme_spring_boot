@@ -1,18 +1,25 @@
-package com.findme_spring_boot.dao;
+package com.findme_spring_boot.oracle.dao.impl;
 
+import com.findme_spring_boot.oracle.dao.BaseDAO;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
+import java.util.Optional;
 
 @Transactional
-public class BaseDAO <T> {
+public class BaseDAOImpl<T> implements BaseDAO<T> {
     private Class<T> typeOfT;
 
     @PersistenceContext
     protected EntityManager entityManager;
 
-    public BaseDAO(Class<T> typeOfT) {
+    public BaseDAOImpl(Class<T> typeOfT) {
         this.typeOfT = typeOfT;
     }
 

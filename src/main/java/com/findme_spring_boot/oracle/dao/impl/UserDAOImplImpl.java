@@ -1,6 +1,7 @@
-package com.findme_spring_boot.dao;
+package com.findme_spring_boot.oracle.dao.impl;
 
-import com.findme_spring_boot.models.User;
+import com.findme_spring_boot.oracle.dao.UserDAO;
+import com.findme_spring_boot.oracle.models.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,12 +10,12 @@ import javax.persistence.Query;
 
 @Repository
 @Transactional
-public class UserDAO extends BaseDAO<User> {
+public class UserDAOImplImpl extends BaseDAOImpl<User> implements UserDAO {
     private static final String findUserDuplicate = "SELECT COUNT(*) FROM USER_FM WHERE EMAIL = ?1 OR PHONE = ?2";
     private static final String SELECT_BY_EMAILS_PASSWORD = "SELECT * FROM USER_FM WHERE EMAIL = ?1 AND PASSWORD = ?2";
     //TODO I've updated naming for queries, it is commonn format in java
 
-    public UserDAO() {
+    public UserDAOImplImpl() {
         super(User.class);
     }
 

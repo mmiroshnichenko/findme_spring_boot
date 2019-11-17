@@ -20,3 +20,87 @@
 2019-11-06 14:53:33,750 INFO c.f.c.UserController [http-nio-8080-exec-8] User with id: 2 was registered
 2019-11-06 14:54:08,378 INFO c.f.c.RelationshipController [http-nio-8080-exec-3] New relationship:Relationship(id=1, userFrom=User{id=1, firstName='null', lastName='null', phone='null', country='null', city='null', age=null}, userTo=User{id=2, firstName='null', lastName='null', phone='null', country='null', city='null', age=null}, relationshipStatus=REQUESTED, dateModify=Wed Nov 06 14:54:07 EET 2019)
 2019-11-06 14:55:11,693 INFO c.f.c.RelationshipController [http-nio-8080-exec-6] Updated relationship:Relationship(id=1, userFrom=User{id=1, firstName='null', lastName='null', phone='null', country='null', city='null', age=null}, userTo=User{id=2, firstName='null', lastName='null', phone='null', country='null', city='null', age=null}, relationshipStatus=CONFIRMED, dateModify=Wed Nov 06 14:55:11 EET 2019)
+2019-11-17 14:07:41,867 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 744 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 14:07:41,875 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 14:07:41,876 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 14:07:53,916 INFO o.s.b.StartupInfoLogger [main] Started Application in 12.486 seconds (JVM running for 14.545)
+2019-11-17 19:51:52,389 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 2280 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 19:51:52,409 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 19:51:52,410 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 19:57:06,453 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 5180 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 19:57:06,460 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 19:57:06,460 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 19:59:52,519 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 9288 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 19:59:52,526 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 19:59:52,526 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:11:12,981 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 8756 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:11:12,988 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:11:12,988 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:13:27,613 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 14212 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:13:27,620 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:13:27,620 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:14:10,839 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 2296 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:14:10,846 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:14:10,846 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:14:20,057 INFO o.s.b.StartupInfoLogger [main] Started Application in 9.584 seconds (JVM running for 11.064)
+2019-11-17 20:16:21,473 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 14320 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:16:21,480 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:16:21,481 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:16:29,756 INFO o.s.b.StartupInfoLogger [main] Started Application in 8.65 seconds (JVM running for 10.007)
+2019-11-17 20:21:04,041 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 2148 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:21:04,048 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:21:04,049 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:21:12,455 INFO o.s.b.StartupInfoLogger [main] Started Application in 8.801 seconds (JVM running for 10.137)
+2019-11-17 20:23:04,629 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 9064 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:23:04,635 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:23:04,635 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:23:12,957 INFO o.s.b.StartupInfoLogger [main] Started Application in 8.701 seconds (JVM running for 10.085)
+2019-11-17 20:43:43,744 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 14676 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:43:43,752 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:43:43,753 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:43:52,798 INFO o.s.b.StartupInfoLogger [main] Started Application in 9.454 seconds (JVM running for 11.106)
+2019-11-17 20:44:36,479 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 3208 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:44:36,488 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:44:36,489 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:44:43,167 INFO o.s.b.StartupInfoLogger [main] Started Application in 7.117 seconds (JVM running for 8.696)
+2019-11-17 20:47:15,531 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 9680 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:47:15,537 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:47:15,538 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:47:22,960 INFO o.s.b.StartupInfoLogger [main] Started Application in 7.813 seconds (JVM running for 9.845)
+2019-11-17 20:55:50,180 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 13876 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:55:50,193 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:55:50,195 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:55:58,790 INFO o.s.b.StartupInfoLogger [main] Started Application in 9.134 seconds (JVM running for 11.206)
+2019-11-17 20:59:37,382 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 5660 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 20:59:37,389 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 20:59:37,390 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 20:59:45,444 INFO o.s.b.StartupInfoLogger [main] Started Application in 8.5 seconds (JVM running for 10.295)
+2019-11-17 21:03:16,141 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 11560 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 21:03:16,146 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 21:03:16,147 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 21:03:22,799 INFO o.s.b.StartupInfoLogger [main] Started Application in 7.011 seconds (JVM running for 8.366)
+2019-11-17 21:07:42,946 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 6524 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 21:07:42,955 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 21:07:42,955 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 21:07:50,206 INFO o.s.b.StartupInfoLogger [main] Started Application in 7.67 seconds (JVM running for 9.244)
+2019-11-17 21:08:45,070 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 13924 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 21:08:45,070 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 21:08:45,070 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 21:08:52,627 INFO o.s.b.StartupInfoLogger [main] Started Application in 7.958 seconds (JVM running for 9.447)
+2019-11-17 21:13:46,077 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 2184 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 21:13:46,085 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 21:13:46,086 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 21:13:56,563 INFO o.s.b.StartupInfoLogger [main] Started Application in 10.869 seconds (JVM running for 12.457)
+2019-11-17 21:13:58,016 INFO c.f.c.UserController [http-nio-8080-exec-1] User with id: 1 was registered
+2019-11-17 21:37:18,186 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 2352 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 21:37:18,194 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 21:37:18,194 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 21:37:26,140 INFO o.s.b.StartupInfoLogger [main] Started Application in 8.353 seconds (JVM running for 10.037)
+2019-11-17 21:39:45,497 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 8776 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 21:39:45,505 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 21:39:45,506 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 21:39:53,674 INFO o.s.b.StartupInfoLogger [main] Started Application in 8.634 seconds (JVM running for 10.406)
+2019-11-17 21:41:38,940 INFO o.s.b.StartupInfoLogger [main] Starting Application on IEVL305 with PID 3728 (C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot\target\classes started by miroshnichenko in C:\Users\miroshnichenko\IdeaProjects\findme_spring_boot)
+2019-11-17 21:41:38,947 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.1.9.RELEASE, Spring v5.1.10.RELEASE
+2019-11-17 21:41:38,948 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-11-17 21:41:46,986 INFO o.s.b.StartupInfoLogger [main] Started Application in 8.441 seconds (JVM running for 10.152)

@@ -1,6 +1,6 @@
 package com.findme_spring_boot.validator;
 
-import com.findme_spring_boot.models.RelationshipStatus;
+import com.findme_spring_boot.oracle.models.RelationshipStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

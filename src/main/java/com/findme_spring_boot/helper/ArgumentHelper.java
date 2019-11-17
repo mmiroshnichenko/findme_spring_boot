@@ -1,7 +1,7 @@
 package com.findme_spring_boot.helper;
 
 import com.findme_spring_boot.exception.BadRequestException;
-import com.findme_spring_boot.models.RelationshipStatus;
+import com.findme_spring_boot.oracle.models.RelationshipStatus;
 import org.springframework.stereotype.Service;
 
 @Service

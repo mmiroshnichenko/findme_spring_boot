@@ -1,7 +1,8 @@
-package com.findme_spring_boot.dao;
+package com.findme_spring_boot.oracle.dao.impl;
 
-import com.findme_spring_boot.models.Relationship;
-import com.findme_spring_boot.models.RelationshipStatus;
+import com.findme_spring_boot.oracle.dao.RelationshipDAO;
+import com.findme_spring_boot.oracle.models.Relationship;
+import com.findme_spring_boot.oracle.models.RelationshipStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class RelationshipDAO extends BaseDAO<Relationship> {
+public class RelationshipDAOImpl extends BaseDAOImpl<Relationship> implements RelationshipDAO {
     private static final String FIND_EXIST_RELATIONSHIP = "SELECT * FROM RELATIONSHIP " +
             "WHERE (USER_FROM_ID = ?1 AND USER_TO_ID = ?2) OR (USER_FROM_ID = ?2 AND USER_TO_ID = ?1)";
 
@@ -33,7 +34,7 @@ public class RelationshipDAO extends BaseDAO<Relationship> {
 
     //TODO error handling missed as well
 
-    public RelationshipDAO() {
+    public RelationshipDAOImpl() {
         super(Relationship.class);
     }
 

@@ -1,8 +1,9 @@
-package com.findme_spring_boot.dao;
+package com.findme_spring_boot.oracle.dao.impl;
 
-import com.findme_spring_boot.models.Post;
-import com.findme_spring_boot.models.PostFilter;
-import com.findme_spring_boot.models.User;
+import com.findme_spring_boot.oracle.dao.PostDAO;
+import com.findme_spring_boot.oracle.models.Post;
+import com.findme_spring_boot.oracle.models.PostFilter;
+import com.findme_spring_boot.oracle.models.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +13,14 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class PostDAO extends BaseDAO<Post> {
+public class PostDAOImpl extends BaseDAOImpl<Post> implements PostDAO {
     private static final String findFeed = "SELECT P.* FROM POST P"
             + " INNER JOIN RELATIONSHIP R ON (R.USER_FROM_ID = ?1 AND R.USER_TO_ID = P.USER_POSTED_ID) OR (R.USER_TO_ID = ?1 AND R.USER_FROM_ID = P.USER_POSTED_ID)"
             + " WHERE R.STATUS = 'CONFIRMED'"
             + " ORDER BY P.DATE_POSTED DESC";
     private static final int limitRows = 20;
 
-    public PostDAO() {
+    public PostDAOImpl() {
         super(Post.class);
     }
 
