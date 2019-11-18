@@ -3,7 +3,6 @@ package com.findme_spring_boot.controller;
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.ForbiddenException;
 import com.findme_spring_boot.exception.NotFoundException;
-import com.findme_spring_boot.helper.ArgumentHelper;
 import com.findme_spring_boot.oracle.models.Relationship;
 import com.findme_spring_boot.oracle.models.User;
 import com.findme_spring_boot.service.RelationshipService;
@@ -24,14 +23,12 @@ import java.util.List;
 @Controller
 public class RelationshipController {
     private RelationshipService relationshipService;
-    private ArgumentHelper argumentHelper;
 
     private static final Logger relationshipLogger = LogManager.getLogger(RelationshipController.class);
 
     @Autowired
-    public RelationshipController(RelationshipService relationshipService, ArgumentHelper argumentHelper) {
+    public RelationshipController(RelationshipService relationshipService) {
         this.relationshipService = relationshipService;
-        this.argumentHelper = argumentHelper;
     }
 
     @RequestMapping(path = "/relationship/add", method = RequestMethod.POST, consumes = "application/json")
@@ -39,15 +36,15 @@ public class RelationshipController {
         try {
             relationshipService.addRelationship(relationship, (User) session.getAttribute("USER"));
             relationshipLogger.info("New relationship:" + relationship.toString());
-            return new ResponseEntity<String>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BadRequestException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (ForbiddenException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -56,15 +53,15 @@ public class RelationshipController {
         try {
             relationshipService.updateRelationship(relationship);
             relationshipLogger.info("Updated relationship:" + relationship.toString());
-            return new ResponseEntity<String>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BadRequestException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (ForbiddenException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

@@ -35,7 +35,7 @@ public class RelationshipService {
         relationshipDAO.update(relationship);
     }
 
-    public List<Relationship> getRelationshipsForUser(Long userId) {
+    public List<Relationship> getRelationshipsForUser(Long userId) throws Exception {
         return relationshipDAO.getRelationshipsForUser(userId);
     }
 
@@ -47,7 +47,7 @@ public class RelationshipService {
         return relationshipDAO.getOutcomeRequests(user.getId());
     }
 
-    public Relationship getRelationshipBetweenUsers(long user1Id, long user2Id) {
+    public Relationship getRelationshipBetweenUsers(long user1Id, long user2Id) throws Exception {
         return relationshipDAO.getExistRelationship(user1Id, user2Id);
     }
 

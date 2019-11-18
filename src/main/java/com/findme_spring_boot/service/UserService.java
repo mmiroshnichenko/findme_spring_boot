@@ -33,11 +33,15 @@ public class UserService {
         return userDAO.update(user);
     }
 
-    public void delete(long id) throws Exception {
-        userDAO.delete(findById(id));
+    public void delete(String id) throws Exception {
+        userDAO.delete(findById(parseUserId(id)));
     }
 
-    public User findById(long id) throws Exception {
+    public User findByStringUserId(String id) throws Exception {
+        return findById(parseUserId(id));
+    }
+
+    public User findById(Long id) throws Exception {
         User user = userDAO.findById(id);
         if (user == null) {
             throw new NotFoundException("Error: user(id: " + id + ") was not found");
@@ -57,6 +61,19 @@ public class UserService {
         }
 
         return user;
+    }
+
+    private Long parseUserId(String id) throws BadRequestException {
+        try {
+            long paramId = Long.parseLong(id);
+            if (paramId <= 0) {
+                throw new BadRequestException("Error: incorrect user id: " + id);
+            }
+
+            return paramId;
+        } catch (NumberFormatException e) {
+            throw new BadRequestException("Error: incorrect user id format");
+        }
     }
 
     private void validateUser(User user) throws Exception {

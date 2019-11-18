@@ -23,9 +23,9 @@ public class TextController {
     public ResponseEntity<String> save(@RequestBody Text text) {
         try {
             textService.save(text);
-            return new ResponseEntity<String>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

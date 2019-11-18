@@ -3,7 +3,6 @@ package com.findme_spring_boot.controller;
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.ForbiddenException;
 import com.findme_spring_boot.exception.NotFoundException;
-import com.findme_spring_boot.helper.ArgumentHelper;
 import com.findme_spring_boot.oracle.models.User;
 import com.findme_spring_boot.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -22,54 +21,51 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
     private UserService userService;
-    private ArgumentHelper argumentHelper;
 
     private static final Logger userLogger = LogManager.getLogger(UserController.class);
 
 
     @Autowired
-    public UserController(UserService userService, ArgumentHelper argumentHelper) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.argumentHelper = argumentHelper;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/user/update", consumes = "application/json")
     public ResponseEntity<String> update(@RequestBody User user) {
         try {
             userService.update(user);
-            //TODO String can be deleted from generics here, as java see your type
-            return new ResponseEntity<String>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BadRequestException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (ForbiddenException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/user/delete/{userId}")
     public ResponseEntity<String> delete(@PathVariable String userId) {
         try {
-            userService.delete(argumentHelper.parseLongArgument(userId));
-            return new ResponseEntity<String>("ok", HttpStatus.OK);
+            userService.delete(userId);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BadRequestException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (ForbiddenException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/user/{userId}", produces = "text/plain")
     public String get(Model model, @PathVariable String userId) {
         try {
-            model.addAttribute("user", userService.findById(argumentHelper.parseLongArgument(userId)));
+            model.addAttribute("user", userService.findByStringUserId(userId));
             return "profile";
         } catch (NotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -91,11 +87,11 @@ public class UserController {
         try {
             userService.save(user);
             userLogger.info("User with id: " + user.getId() + " was registered");
-            return new ResponseEntity<String>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (BadRequestException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -112,16 +108,16 @@ public class UserController {
             HttpHeaders headers = new HttpHeaders();
             //TODO why do you need header here?
             headers.add("Location", "/user/" + user.getId());
-            return new ResponseEntity<String>(headers, HttpStatus.OK);
+            return new ResponseEntity<>(headers, HttpStatus.OK);
         } catch (BadRequestException e) {
             userLogger.error(e.getMessage());
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (ForbiddenException e) {
             userLogger.error(e.getMessage());
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
         } catch (Exception e) {
             userLogger.error(e.getMessage());
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -131,9 +127,9 @@ public class UserController {
             session.invalidate();
             HttpHeaders headers = new HttpHeaders();
             headers.add("Location", "/login");
-            return new ResponseEntity<String>(headers, HttpStatus.OK);
+            return new ResponseEntity<>(headers, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

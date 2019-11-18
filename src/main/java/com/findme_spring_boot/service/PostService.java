@@ -41,16 +41,20 @@ public class PostService {
         return postDAO.update(post);
     }
 
-    public void delete(long id) throws Exception {
-        postDAO.delete(findById(id));
+    public void delete(String id) throws Exception {
+        postDAO.delete(findById(parsePostId(id)));
     }
 
-    public List<Post> getList(User authUser, PostFilter filter) {
+    public List<Post> getList(User authUser, PostFilter filter) throws Exception {
         return postDAO.getPostsByFilter(authUser.getId(), filter);
     }
 
-    public List<Post> getFeed(User authUser, int start) {
+    public List<Post> getFeed(User authUser, int start) throws Exception {
         return postDAO.getFeed(authUser.getId(), start);
+    }
+
+    public Post findByStringPostId(String id) throws Exception {
+        return findById(parsePostId(id));
     }
 
     public Post findById(long id) throws Exception{
@@ -60,6 +64,19 @@ public class PostService {
         }
 
         return post;
+    }
+
+    private Long parsePostId(String id) throws BadRequestException {
+        try {
+            long paramId = Long.parseLong(id);
+            if (paramId <= 0) {
+                throw new BadRequestException("Error: incorrect post id: " + id);
+            }
+
+            return paramId;
+        } catch (NumberFormatException e) {
+            throw new BadRequestException("Error: incorrect post id format");
+        }
     }
 
     private void validate(Post post) throws Exception {

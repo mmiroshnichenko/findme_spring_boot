@@ -1,5 +1,6 @@
 package com.findme_spring_boot.oracle.dao.impl;
 
+import com.findme_spring_boot.exception.InternalServerException;
 import com.findme_spring_boot.oracle.dao.BaseDAO;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -23,24 +24,38 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
         this.typeOfT = typeOfT;
     }
 
-    //TODO where is error handling?? it is super important, I wrote about that before
-    public T save(T object) {
-        entityManager.persist(object);
-
-        return object;
+    public T save(T object) throws InternalServerException {
+        try {
+            entityManager.persist(object);
+            return object;
+        } catch (Exception e) {
+            throw new InternalServerException(e.getMessage());
+        }
     }
 
-    public T update(T object) {
-        entityManager.merge(object);
+    public T update(T object) throws InternalServerException {
+        try {
+            entityManager.merge(object);
 
-        return object;
+            return object;
+        } catch (Exception e) {
+            throw new InternalServerException(e.getMessage());
+        }
     }
 
-    public void delete(T object) {
-        entityManager.remove(object);
+    public void delete(T object) throws InternalServerException {
+        try {
+            entityManager.remove(object);
+        } catch (Exception e) {
+            throw new InternalServerException(e.getMessage());
+        }
     }
 
-    public T findById(long id) {
-        return entityManager.find(this.typeOfT, id);
+    public T findById(long id) throws InternalServerException {
+        try {
+            return entityManager.find(this.typeOfT, id);
+        } catch (Exception e) {
+            throw new InternalServerException(e.getMessage());
+        }
     }
 }

@@ -2,7 +2,6 @@ package com.findme_spring_boot.controller;
 
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.NotFoundException;
-import com.findme_spring_boot.helper.ArgumentHelper;
 import com.findme_spring_boot.oracle.models.Post;
 import com.findme_spring_boot.oracle.models.PostFilter;
 import com.findme_spring_boot.oracle.models.User;
@@ -21,25 +20,23 @@ import java.util.List;
 public class PostController {
 
     private PostService postService;
-    private ArgumentHelper argumentHelper;
 
     @Autowired
-    public PostController(PostService postService, ArgumentHelper argumentHelper) {
+    public PostController(PostService postService) {
         this.postService = postService;
-        this.argumentHelper = argumentHelper;
     }
 
     @RequestMapping(path = "/post/save", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> save(@RequestBody Post post) {
         try {
             postService.save(post);
-            return new ResponseEntity<String>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BadRequestException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -71,34 +68,34 @@ public class PostController {
     public ResponseEntity<String> update(@RequestBody Post post) {
         try {
             postService.update(post);
-            return new ResponseEntity<String>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BadRequestException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/post/delete/{postId}")
     public ResponseEntity<String> delete(@PathVariable String postId) {
         try {
-            postService.delete(argumentHelper.parseLongArgument(postId));
-            return new ResponseEntity<String>("post deleted", HttpStatus.OK);
+            postService.delete(postId);
+            return new ResponseEntity<>("post deleted", HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (BadRequestException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/post/{postId}", produces = "text/plain")
     public String get(Model model, @PathVariable String postId) {
         try {
-            model.addAttribute("post", postService.findById(argumentHelper.parseLongArgument(postId)));
+            model.addAttribute("post", postService.findByStringPostId(postId));
             return "post";
         } catch (NotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());

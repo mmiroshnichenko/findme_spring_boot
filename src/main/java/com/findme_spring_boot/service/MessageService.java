@@ -39,8 +39,12 @@ public class MessageService {
         return messageDAO.update(message);
     }
 
-    public void delete(long id) throws Exception {
-        messageDAO.delete(findById(id));
+    public void delete(String id) throws Exception {
+        messageDAO.delete(findById(parseMessageId(id)));
+    }
+
+    public Message findByStringMessageId(String id) throws Exception {
+        return findById(parseMessageId(id));
     }
 
     public Message findById(long id) throws Exception{
@@ -50,6 +54,19 @@ public class MessageService {
         }
 
         return message;
+    }
+
+    private Long parseMessageId(String id) throws BadRequestException {
+        try {
+            long paramId = Long.parseLong(id);
+            if (paramId <= 0) {
+                throw new BadRequestException("Error: incorrect message id: " + id);
+            }
+
+            return paramId;
+        } catch (NumberFormatException e) {
+            throw new BadRequestException("Error: incorrect message id format");
+        }
     }
 
     private void validate(Message message) throws Exception {
