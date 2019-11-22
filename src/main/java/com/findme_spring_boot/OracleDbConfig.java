@@ -18,10 +18,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(
-        entityManagerFactoryRef = "entityManagerFactory",
-        basePackages = {"com.findme_spring_boot.oracle.dao"}
-)
+@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = {"com.findme_spring_boot.oracle.dao"})
 public class OracleDbConfig {
     @Primary
     @Bean(name = "dataSource")
@@ -32,20 +29,14 @@ public class OracleDbConfig {
 
     @Primary
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            EntityManagerFactoryBuilder builder,
-            @Qualifier("dataSource") DataSource dataSource
-    ) {
-        return builder
-                .dataSource(dataSource)
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("dataSource") DataSource dataSource) {
+        return builder.dataSource(dataSource)
                 .packages("com.findme_spring_boot.oracle.models")
                 .persistenceUnit("oracle").build();
     }
 
     @Primary
-    public PlatformTransactionManager transactionManager(
-            @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory
-    ) {
+    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

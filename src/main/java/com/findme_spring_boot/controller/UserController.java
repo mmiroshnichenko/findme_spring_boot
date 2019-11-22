@@ -106,7 +106,6 @@ public class UserController {
             User user = userService.login(request.getParameter("email"), request.getParameter("password"));
             session.setAttribute("USER", user);
             HttpHeaders headers = new HttpHeaders();
-            //TODO why do you need header here?
             headers.add("Location", "/user/" + user.getId());
             return new ResponseEntity<>(headers, HttpStatus.OK);
         } catch (BadRequestException e) {

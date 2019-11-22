@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
+//TODO service shouldn't use that, huge mistake
 @Transactional
 public class UserService {
     private UserDAO userDAO;
@@ -37,6 +38,7 @@ public class UserService {
         userDAO.delete(findById(parseUserId(id)));
     }
 
+    //TODO this method and method below are the same. only one can be here
     public User findByStringUserId(String id) throws Exception {
         return findById(parseUserId(id));
     }

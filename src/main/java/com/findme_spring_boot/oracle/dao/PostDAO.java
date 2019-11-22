@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+//TODO you shouldn't use these annotations for interface
 @Repository
 @Transactional
 public interface PostDAO extends BaseDAO<Post> {

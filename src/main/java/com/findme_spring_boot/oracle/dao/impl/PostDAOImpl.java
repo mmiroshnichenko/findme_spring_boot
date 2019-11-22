@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+//TODO you use this annotation on base DAO
 @Transactional
 public class PostDAOImpl extends BaseDAOImpl<Post> implements PostDAO {
     private static final String SELECT_FEED = "SELECT P.* FROM POST P"

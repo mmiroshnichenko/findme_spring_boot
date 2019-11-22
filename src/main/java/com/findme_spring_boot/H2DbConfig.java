@@ -17,13 +17,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(
-        entityManagerFactoryRef = "h2EntityManagerFactory",
-        transactionManagerRef = "h2TransactionManager",
-        basePackages = { "com.findme_spring_boot.h2.dao" }
-)
+@EnableJpaRepositories(entityManagerFactoryRef = "h2EntityManagerFactory", transactionManagerRef = "h2TransactionManager", basePackages = {"com.findme_spring_boot.h2.dao"})
 public class H2DbConfig {
-
     @Bean(name = "h2DataSource")
     @ConfigurationProperties(prefix = "h2.datasource")
     public DataSource dataSource() {
@@ -31,21 +26,15 @@ public class H2DbConfig {
     }
 
     @Bean(name = "h2EntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean h2EntityManagerFactory(
-            EntityManagerFactoryBuilder builder,
-            @Qualifier("h2DataSource") DataSource dataSource
-    ) {
-        return builder
-                .dataSource(dataSource)
+    public LocalContainerEntityManagerFactoryBean h2EntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("h2DataSource") DataSource dataSource) {
+        return builder.dataSource(dataSource)
                 .packages("com.findme_spring_boot.h2.models")
                 .persistenceUnit("h2")
                 .build();
     }
 
     @Bean(name = "h2TransactionManager")
-    public PlatformTransactionManager h2TransactionManager(
-            @Qualifier("h2EntityManagerFactory") EntityManagerFactory h2EntityManagerFactory
-    ) {
+    public PlatformTransactionManager h2TransactionManager(@Qualifier("h2EntityManagerFactory") EntityManagerFactory h2EntityManagerFactory) {
         return new JpaTransactionManager(h2EntityManagerFactory);
     }
 }

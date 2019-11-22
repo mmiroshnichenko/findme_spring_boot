@@ -73,8 +73,7 @@ public class RelationshipService {
                 .dateModify(dbRelationship.getDateModify())
                 .requestCount(relationshipDAO.getCountOutcomeRequests(relationship.getUserFrom().getId()))
                 .friendsCount(relationshipDAO.getCountFriends(relationship.getUserFrom().getId()))
-                .build()
-            );
+                .build());
     }
 
     private void validateNewRelationship(Relationship relationship, User authUser) throws Exception {
@@ -85,6 +84,7 @@ public class RelationshipService {
             throw new BadRequestException("Error: active relationship already exists");
         }
 
+        //TODO for add new relationship validation is pretty simple. I wouldn't use pattern here. It makes solution over complicated
         BaseRelationshipValidator relationshipValidator = new RequestedRelationshipValidator();
 
         relationshipValidator.check(RelationshipParams.builder()
