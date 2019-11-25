@@ -6,14 +6,12 @@ import com.findme_spring_boot.exception.NotFoundException;
 import com.findme_spring_boot.oracle.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
-@Transactional
 public class PostService {
     private PostDAO postDAO;
     private UserService userService;
@@ -53,10 +51,6 @@ public class PostService {
         return postDAO.getFeed(authUser.getId(), start);
     }
 
-    public Post findByStringPostId(String id) throws Exception {
-        return findById(parsePostId(id));
-    }
-
     public Post findById(long id) throws Exception{
         Post post = postDAO.findById(id);
         if (post == null) {
@@ -66,7 +60,7 @@ public class PostService {
         return post;
     }
 
-    private Long parsePostId(String id) throws BadRequestException {
+    public Long parsePostId(String id) throws BadRequestException {
         try {
             long paramId = Long.parseLong(id);
             if (paramId <= 0) {

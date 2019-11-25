@@ -95,7 +95,7 @@ public class PostController {
     @RequestMapping(method = RequestMethod.GET, value = "/post/{postId}", produces = "text/plain")
     public String get(Model model, @PathVariable String postId) {
         try {
-            model.addAttribute("post", postService.findByStringPostId(postId));
+            model.addAttribute("post", postService.findById(postService.parsePostId(postId)));
             return "post";
         } catch (NotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());

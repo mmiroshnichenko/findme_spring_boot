@@ -7,13 +7,10 @@ import com.findme_spring_boot.exception.NotFoundException;
 import com.findme_spring_boot.oracle.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
 @Service
-//TODO service shouldn't use that, huge mistake
-@Transactional
 public class UserService {
     private UserDAO userDAO;
 
@@ -38,11 +35,6 @@ public class UserService {
         userDAO.delete(findById(parseUserId(id)));
     }
 
-    //TODO this method and method below are the same. only one can be here
-    public User findByStringUserId(String id) throws Exception {
-        return findById(parseUserId(id));
-    }
-
     public User findById(Long id) throws Exception {
         User user = userDAO.findById(id);
         if (user == null) {
@@ -65,7 +57,7 @@ public class UserService {
         return user;
     }
 
-    private Long parseUserId(String id) throws BadRequestException {
+    public Long parseUserId(String id) throws BadRequestException {
         try {
             long paramId = Long.parseLong(id);
             if (paramId <= 0) {

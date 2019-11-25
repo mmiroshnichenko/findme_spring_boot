@@ -14,6 +14,8 @@ import java.util.List;
 
 @Service
 public class RelationshipService {
+    private final Integer maxRequestCount = 10;
+
     private RelationshipDAO relationshipDAO;
 
     @Autowired
@@ -84,14 +86,12 @@ public class RelationshipService {
             throw new BadRequestException("Error: active relationship already exists");
         }
 
-        //TODO for add new relationship validation is pretty simple. I wouldn't use pattern here. It makes solution over complicated
-        BaseRelationshipValidator relationshipValidator = new RequestedRelationshipValidator();
+        if (!relationship.getRelationshipStatus().equals(RelationshipStatus.NEW)) {
+            throw new BadRequestException("Error: incorrect new REQUESTED status for relationship");
+        }
 
-        relationshipValidator.check(RelationshipParams.builder()
-                .currentStatus(RelationshipStatus.NEW)
-                .nextStatus(relationship.getRelationshipStatus())
-                .requestCount(relationshipDAO.getCountOutcomeRequests(relationship.getUserFrom().getId()))
-                .friendsCount(relationshipDAO.getCountFriends(relationship.getUserFrom().getId()))
-                .build());
+        if (relationshipDAO.getCountOutcomeRequests(relationship.getUserFrom().getId()) >= maxRequestCount) {
+            throw new BadRequestException("Error: max request to friends cannot be great that " + maxRequestCount);
+        }
     }
 }

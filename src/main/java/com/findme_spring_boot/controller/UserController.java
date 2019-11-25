@@ -65,7 +65,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/user/{userId}", produces = "text/plain")
     public String get(Model model, @PathVariable String userId) {
         try {
-            model.addAttribute("user", userService.findByStringUserId(userId));
+            model.addAttribute("user", userService.findById(userService.parseUserId(userId)));
             return "profile";
         } catch (NotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());

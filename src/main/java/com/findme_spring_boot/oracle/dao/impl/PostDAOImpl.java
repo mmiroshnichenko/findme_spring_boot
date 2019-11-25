@@ -6,15 +6,12 @@ import com.findme_spring_boot.oracle.models.Post;
 import com.findme_spring_boot.oracle.models.PostFilter;
 import com.findme_spring_boot.oracle.models.User;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-//TODO you use this annotation on base DAO
-@Transactional
 public class PostDAOImpl extends BaseDAOImpl<Post> implements PostDAO {
     private static final String SELECT_FEED = "SELECT P.* FROM POST P"
             + " INNER JOIN RELATIONSHIP R ON (R.USER_FROM_ID = ?1 AND R.USER_TO_ID = P.USER_POSTED_ID) OR (R.USER_TO_ID = ?1 AND R.USER_FROM_ID = P.USER_POSTED_ID)"

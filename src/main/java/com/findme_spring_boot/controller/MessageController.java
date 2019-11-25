@@ -66,7 +66,7 @@ public class MessageController {
     public @ResponseBody
     String get(Model model, @PathVariable String messageId) {
         try {
-            model.addAttribute("message", messageService.findByStringMessageId(messageId));
+            model.addAttribute("message", messageService.findById(messageService.parseMessageId(messageId)));
             return "message";
         } catch (NotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());

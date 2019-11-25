@@ -5,14 +5,12 @@ import com.findme_spring_boot.oracle.dao.RelationshipDAO;
 import com.findme_spring_boot.oracle.models.Relationship;
 import com.findme_spring_boot.oracle.models.RelationshipStatus;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-@Transactional
 public class RelationshipDAOImpl extends BaseDAOImpl<Relationship> implements RelationshipDAO {
     private static final String SELECT_EXIST_RELATIONSHIP = "SELECT * FROM RELATIONSHIP " +
             "WHERE (USER_FROM_ID = ?1 AND USER_TO_ID = ?2) OR (USER_FROM_ID = ?2 AND USER_TO_ID = ?1)";
