@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface RelationshipDAO extends BaseDAO<Relationship> {
 
-    public Relationship getExistRelationship(Long userFromId, Long userToId) throws InternalServerException;
+    Relationship getExistRelationship(Long userFromId, Long userToId) throws InternalServerException;
 
-    public List<Relationship> getRelationshipsForUser(Long userId) throws InternalServerException;
+    List<Relationship> getRelationshipsForUser(Long userId) throws InternalServerException;
 
-    public List<Relationship> getIncomeRequests(Long userId) throws InternalServerException;
+    List<Relationship> getIncomeRequests(Long userId) throws InternalServerException;
 
-    public List<Relationship> getOutcomeRequests(Long userId) throws InternalServerException;
+    List<Relationship> getOutcomeRequests(Long userId) throws InternalServerException;
 
-    public int getCountOutcomeRequests(Long userId) throws InternalServerException;
+    int getCountOutcomeRequests(Long userId) throws InternalServerException;
 
-    public int getCountFriends(Long userId) throws InternalServerException;
+    int getCountFriends(Long userId) throws InternalServerException;
 }

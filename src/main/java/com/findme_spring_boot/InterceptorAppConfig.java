@@ -16,6 +16,7 @@ public class InterceptorAppConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(authInterceptor)
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/register-user")
+                .excludePathPatterns("/text/save")
                 .excludePathPatterns("/");
     }
 }

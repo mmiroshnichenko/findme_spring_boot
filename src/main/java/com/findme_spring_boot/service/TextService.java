@@ -4,6 +4,7 @@ import com.findme_spring_boot.h2.dao.TextDao;
 import com.findme_spring_boot.h2.models.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TextService {
@@ -14,7 +15,7 @@ public class TextService {
         this.textDao = textDao;
     }
 
-    public Text save(Text text) {
+    public Text save(Text text) throws Exception {
         return textDao.save(text);
     }
 }

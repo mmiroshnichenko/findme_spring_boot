@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PostDAO extends BaseDAO<Post> {
 
-    public List<Post> getPostsByFilter(Long authUserId, PostFilter filter) throws InternalServerException;
+    List<Post> getPostsByFilter(Long authUserId, PostFilter filter) throws InternalServerException;
 
-    public List<Post> getFeed(Long userId, int start) throws InternalServerException;
+    List<Post> getFeed(Long userId, int start) throws InternalServerException;
 }
