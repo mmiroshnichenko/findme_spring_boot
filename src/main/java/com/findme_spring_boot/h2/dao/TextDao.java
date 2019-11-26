@@ -11,11 +11,9 @@ import javax.persistence.EntityManager;
 
 
 @Repository
-@Transactional
+@Transactional("h2TransactionManager")
 public class TextDao {
     protected EntityManager entityManager;
-
-    private static final String SELECT_FEED = "INSERT INTO TEXT(ID, TITLE, BODY) VALUES (?1, ?2, ?3)";
 
     @Autowired
     public TextDao(@Qualifier("h2EntityManagerFactory") EntityManager entityManager) {
@@ -24,12 +22,8 @@ public class TextDao {
 
     public Text save(Text object) throws InternalServerException {
         try {
-            //entityManager.persist(object);
-            entityManager.createNativeQuery(SELECT_FEED, Text.class)
-                    .setParameter(1, 2)
-                    .setParameter(2, object.getTitle())
-                    .setParameter(3, object.getBody())
-                    .executeUpdate();
+            entityManager.persist(object);
+
             return object;
         } catch (Exception e) {
             throw new InternalServerException(e.getMessage());

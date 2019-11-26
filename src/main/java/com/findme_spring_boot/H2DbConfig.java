@@ -7,7 +7,9 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -36,5 +38,13 @@ public class H2DbConfig {
         emf.setJpaProperties(properties);
 
         return emf;
+    }
+
+    @Bean(name = "h2TransactionManager")
+    public PlatformTransactionManager h2TransactionManager(
+            @Qualifier("h2EntityManagerFactory") LocalContainerEntityManagerFactoryBean
+                    h2EntityManagerFactory
+    ) {
+        return new JpaTransactionManager(h2EntityManagerFactory.getObject());
     }
 }
