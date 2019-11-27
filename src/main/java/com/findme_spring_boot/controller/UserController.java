@@ -3,7 +3,7 @@ package com.findme_spring_boot.controller;
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.ForbiddenException;
 import com.findme_spring_boot.exception.NotFoundException;
-import com.findme_spring_boot.oracle.models.User;
+import com.findme_spring_boot.model.oracle.User;
 import com.findme_spring_boot.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

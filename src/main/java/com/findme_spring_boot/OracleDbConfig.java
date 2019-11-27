@@ -34,7 +34,7 @@ public class OracleDbConfig {
         properties.setProperty("hibernate.dialect", dialect);
 
         LocalContainerEntityManagerFactoryBean emf = builder.dataSource(dataSource)
-                .packages("com.findme_spring_boot.oracle.models")
+                .packages("com.findme_spring_boot.model.oracle")
                 .persistenceUnit("oracle")
                 .build();
 

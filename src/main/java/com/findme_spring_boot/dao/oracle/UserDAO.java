@@ -1,7 +1,7 @@
-package com.findme_spring_boot.oracle.dao;
+package com.findme_spring_boot.dao.oracle;
 
 import com.findme_spring_boot.exception.InternalServerException;
-import com.findme_spring_boot.oracle.models.User;
+import com.findme_spring_boot.model.oracle.User;
 
 public interface UserDAO extends BaseDAO<User> {
 

@@ -1,7 +1,7 @@
-package com.findme_spring_boot.oracle.dao;
+package com.findme_spring_boot.dao.oracle;
 
 import com.findme_spring_boot.exception.InternalServerException;
-import com.findme_spring_boot.oracle.models.Relationship;
+import com.findme_spring_boot.model.oracle.Relationship;
 
 import java.util.List;
 

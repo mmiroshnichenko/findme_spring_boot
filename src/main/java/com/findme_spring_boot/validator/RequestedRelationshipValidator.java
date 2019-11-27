@@ -1,7 +1,7 @@
 package com.findme_spring_boot.validator;
 
 import com.findme_spring_boot.exception.BadRequestException;
-import com.findme_spring_boot.oracle.models.RelationshipStatus;
+import com.findme_spring_boot.model.oracle.RelationshipStatus;
 
 public class RequestedRelationshipValidator extends BaseRelationshipValidator {
     private final Integer maxRequestCount = 10;

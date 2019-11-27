@@ -1,10 +1,10 @@
 package com.findme_spring_boot.service;
 
-import com.findme_spring_boot.oracle.dao.RelationshipDAO;
+import com.findme_spring_boot.dao.oracle.RelationshipDAO;
 import com.findme_spring_boot.exception.BadRequestException;
-import com.findme_spring_boot.oracle.models.Relationship;
-import com.findme_spring_boot.oracle.models.RelationshipStatus;
-import com.findme_spring_boot.oracle.models.User;
+import com.findme_spring_boot.model.oracle.Relationship;
+import com.findme_spring_boot.model.oracle.RelationshipStatus;
+import com.findme_spring_boot.model.oracle.User;
 import com.findme_spring_boot.validator.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

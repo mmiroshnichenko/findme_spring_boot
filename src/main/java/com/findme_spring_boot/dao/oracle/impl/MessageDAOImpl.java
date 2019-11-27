@@ -1,7 +1,7 @@
-package com.findme_spring_boot.oracle.dao.impl;
+package com.findme_spring_boot.dao.oracle.impl;
 
-import com.findme_spring_boot.oracle.dao.MessageDAO;
-import com.findme_spring_boot.oracle.models.Message;
+import com.findme_spring_boot.dao.oracle.MessageDAO;
+import com.findme_spring_boot.model.oracle.Message;
 import org.springframework.stereotype.Repository;
 
 @Repository

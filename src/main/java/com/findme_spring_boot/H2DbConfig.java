@@ -31,7 +31,7 @@ public class H2DbConfig {
         properties.setProperty("hibernate.dialect", dialect);
 
         LocalContainerEntityManagerFactoryBean emf = builder.dataSource(dataSource)
-                .packages("com.findme_spring_boot.h2.models")
+                .packages("com.findme_spring_boot.model.h2")
                 .persistenceUnit("h2")
                 .build();
 

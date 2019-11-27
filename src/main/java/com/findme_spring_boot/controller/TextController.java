@@ -1,6 +1,6 @@
 package com.findme_spring_boot.controller;
 
-import com.findme_spring_boot.h2.models.Text;
+import com.findme_spring_boot.model.h2.Text;
 import com.findme_spring_boot.service.TextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

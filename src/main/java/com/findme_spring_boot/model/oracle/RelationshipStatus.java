@@ -1,4 +1,4 @@
-package com.findme_spring_boot.oracle.models;
+package com.findme_spring_boot.model.oracle;
 
 public enum RelationshipStatus {
     NEW,

@@ -1,8 +1,8 @@
-package com.findme_spring_boot.oracle.dao;
+package com.findme_spring_boot.dao.oracle;
 
 import com.findme_spring_boot.exception.InternalServerException;
-import com.findme_spring_boot.oracle.models.Post;
-import com.findme_spring_boot.oracle.models.PostFilter;
+import com.findme_spring_boot.model.oracle.Post;
+import com.findme_spring_boot.model.oracle.PostFilter;
 
 import java.util.List;
 

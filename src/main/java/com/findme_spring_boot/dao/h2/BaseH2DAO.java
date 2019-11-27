@@ -1,8 +1,8 @@
-package com.findme_spring_boot.oracle.dao;
+package com.findme_spring_boot.dao.h2;
 
 import com.findme_spring_boot.exception.InternalServerException;
 
-public interface BaseDAO <T> {
+public interface BaseH2DAO <T> {
     T save(T object) throws InternalServerException;
 
     T update(T object) throws InternalServerException;

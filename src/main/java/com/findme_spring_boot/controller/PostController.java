@@ -2,9 +2,9 @@ package com.findme_spring_boot.controller;
 
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.NotFoundException;
-import com.findme_spring_boot.oracle.models.Post;
-import com.findme_spring_boot.oracle.models.PostFilter;
-import com.findme_spring_boot.oracle.models.User;
+import com.findme_spring_boot.model.oracle.Post;
+import com.findme_spring_boot.model.oracle.PostFilter;
+import com.findme_spring_boot.model.oracle.User;
 import com.findme_spring_boot.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

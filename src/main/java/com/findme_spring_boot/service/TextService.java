@@ -1,17 +1,16 @@
 package com.findme_spring_boot.service;
 
-import com.findme_spring_boot.h2.dao.TextDao;
-import com.findme_spring_boot.h2.models.Text;
+import com.findme_spring_boot.dao.h2.TextDAO;
+import com.findme_spring_boot.model.h2.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TextService {
-    private TextDao textDao;
+    private TextDAO textDao;
 
     @Autowired
-    public TextService(TextDao textDao) {
+    public TextService(TextDAO textDao) {
         this.textDao = textDao;
     }
 

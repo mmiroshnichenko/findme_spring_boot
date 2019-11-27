@@ -1,4 +1,4 @@
-package com.findme_spring_boot.h2.models;
+package com.findme_spring_boot.model.h2;
 
 
 import lombok.Getter;

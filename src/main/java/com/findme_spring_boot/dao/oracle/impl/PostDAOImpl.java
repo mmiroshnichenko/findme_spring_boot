@@ -1,10 +1,10 @@
-package com.findme_spring_boot.oracle.dao.impl;
+package com.findme_spring_boot.dao.oracle.impl;
 
 import com.findme_spring_boot.exception.InternalServerException;
-import com.findme_spring_boot.oracle.dao.PostDAO;
-import com.findme_spring_boot.oracle.models.Post;
-import com.findme_spring_boot.oracle.models.PostFilter;
-import com.findme_spring_boot.oracle.models.User;
+import com.findme_spring_boot.dao.oracle.PostDAO;
+import com.findme_spring_boot.model.oracle.Post;
+import com.findme_spring_boot.model.oracle.PostFilter;
+import com.findme_spring_boot.model.oracle.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.*;

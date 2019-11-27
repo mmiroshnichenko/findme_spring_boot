@@ -1,10 +1,10 @@
 package com.findme_spring_boot.service;
 
-import com.findme_spring_boot.oracle.dao.UserDAO;
+import com.findme_spring_boot.dao.oracle.UserDAO;
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.ForbiddenException;
 import com.findme_spring_boot.exception.NotFoundException;
-import com.findme_spring_boot.oracle.models.User;
+import com.findme_spring_boot.model.oracle.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
