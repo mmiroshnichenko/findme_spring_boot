@@ -27,85 +27,40 @@ public class PostController {
     }
 
     @RequestMapping(path = "/post/save", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<String> save(@RequestBody Post post) {
-        try {
-            postService.save(post);
-            return new ResponseEntity<>("ok", HttpStatus.OK);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<String> save(@RequestBody Post post) throws Exception {
+        postService.save(post);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/post/list", produces = "text/plain")
-    public String getList(Model model, HttpSession session, PostFilter filter) {
-        try {
-            List<Post> postList = postService.getList((User) session.getAttribute("USER"), filter);
-            model.addAttribute("postList", postList);
-            return "postList";
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "errors/internalError";
-        }
+    public String getList(Model model, HttpSession session, PostFilter filter) throws Exception {
+        List<Post> postList = postService.getList((User) session.getAttribute("USER"), filter);
+        model.addAttribute("postList", postList);
+        return "postList";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/feed", produces = "text/plain")
-    public String getFeed(Model model, HttpSession session, @RequestParam(value = "start", required = false, defaultValue = "0") int start) {
-        try {
+    public String getFeed(Model model, HttpSession session, @RequestParam(value = "start", required = false, defaultValue = "0") int start) throws Exception {
             List<Post> feed = postService.getFeed((User) session.getAttribute("USER"), start);
             model.addAttribute("feed", feed);
             return "feed";
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "errors/internalError";
-        }
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/post/update", consumes = "application/json")
-    public ResponseEntity<String> update(@RequestBody Post post) {
-        try {
-            postService.update(post);
-            return new ResponseEntity<>("ok", HttpStatus.OK);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<String> update(@RequestBody Post post) throws Exception {
+        postService.update(post);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/post/delete/{postId}")
-    public ResponseEntity<String> delete(@PathVariable String postId) {
-        try {
-            postService.delete(postId);
-            return new ResponseEntity<>("post deleted", HttpStatus.OK);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<String> delete(@PathVariable String postId) throws Exception {
+        postService.delete(postId);
+        return new ResponseEntity<>("post deleted", HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/post/{postId}", produces = "text/plain")
-    public String get(Model model, @PathVariable String postId) {
-        try {
-            model.addAttribute("post", postService.findById(postService.parsePostId(postId)));
-            return "post";
-        } catch (NotFoundException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "errors/notFound";
-        } catch (BadRequestException | NumberFormatException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "errors/badRequest";
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "errors/internalError";
-        }
+    public String get(Model model, @PathVariable String postId) throws Exception {
+        model.addAttribute("post", postService.findById(postService.parsePostId(postId)));
+        return "post";
     }
 }

@@ -21,62 +21,27 @@ public class MessageController {
     }
 
     @RequestMapping(path = "/message/save", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<String> save(@RequestBody Message message) {
-        try {
-            messageService.save(message);
-            return new ResponseEntity<>("ok", HttpStatus.OK);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<String> save(@RequestBody Message message) throws Exception {
+        messageService.save(message);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/message/update", consumes = "application/json")
-    public ResponseEntity<String> update(@RequestBody Message message) {
-        try {
-            messageService.update(message);
-            return new ResponseEntity<>("ok", HttpStatus.OK);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<String> update(@RequestBody Message message) throws Exception {
+        messageService.update(message);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/message/delete/{messageId}")
-    public ResponseEntity<String> delete(@PathVariable String messageId) {
-        try {
-            messageService.delete(messageId);
-            return new ResponseEntity<>("message deleted", HttpStatus.OK);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<String> delete(@PathVariable String messageId) throws Exception {
+        messageService.delete(messageId);
+        return new ResponseEntity<>("message deleted", HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/message/get/{messageId}", produces = "text/plain")
     public @ResponseBody
-    String get(Model model, @PathVariable String messageId) {
-        try {
-            model.addAttribute("message", messageService.findById(messageService.parseMessageId(messageId)));
-            return "message";
-        } catch (NotFoundException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "errors/notFound";
-        } catch (BadRequestException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "errors/badRequest";
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "errors/internalError";
-        }
+    String get(Model model, @PathVariable String messageId) throws Exception {
+        model.addAttribute("message", messageService.findById(messageService.parseMessageId(messageId)));
+        return "message";
     }
 }

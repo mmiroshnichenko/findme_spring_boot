@@ -20,12 +20,8 @@ public class TextController {
     }
 
     @RequestMapping(path = "/text/save", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<String> save(@RequestBody Text text) {
-        try {
-            textService.save(text);
-            return new ResponseEntity<>("ok", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<String> save(@RequestBody Text text) throws Exception {
+        textService.save(text);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 }

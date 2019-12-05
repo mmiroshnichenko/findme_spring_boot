@@ -2,8 +2,8 @@ package com.findme_spring_boot.service;
 
 import com.findme_spring_boot.dao.oracle.UserDAO;
 import com.findme_spring_boot.exception.BadRequestException;
-import com.findme_spring_boot.exception.ForbiddenException;
 import com.findme_spring_boot.exception.NotFoundException;
+import com.findme_spring_boot.exception.api.ApiBadRequestException;
 import com.findme_spring_boot.model.oracle.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,12 +46,12 @@ public class UserService {
 
     public User login(String email, String password) throws Exception {
         if (email.isEmpty() || password.isEmpty()) {
-            throw new BadRequestException("Error: email and password is required");
+            throw new ApiBadRequestException("Error: email and password is required");
         }
 
         User user = userDAO.getUserByEmailAndPassword(email, password);
         if (user == null) {
-            throw new ForbiddenException("Error: email or password is incorrect");
+            throw new ApiBadRequestException("Error: email or password is incorrect");
         }
 
         return user;
