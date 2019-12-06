@@ -77,7 +77,7 @@ public class PostService {
         Relationship relationship = relationshipService.getRelationshipBetweenUsers(post.getUserPosted().getId(), post.getUserPagePosted().getId());
 
         if (!post.getUserPosted().equals(post.getUserPagePosted())
-            && (relationship == null || relationship.getRelationshipStatus().equals(RelationshipStatus.CONFIRMED))) {
+            && (relationship == null || !relationship.getRelationshipStatus().equals(RelationshipStatus.CONFIRMED))) {
             throw new BadRequestException("Error: you can make post only in own page and friends page");
         }
 

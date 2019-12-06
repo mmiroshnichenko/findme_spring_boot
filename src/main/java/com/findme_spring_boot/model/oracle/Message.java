@@ -28,6 +28,9 @@ public class Message {
     @Column(name = "DATE_READ")
     private Date dateRead;
 
+    @Column(name = "DATE_DELETED")
+    private Date dateDeleted;
+
     @ManyToOne
     @JoinColumn(name = "USER_FROM_ID", nullable = false)
     private User userFrom;
