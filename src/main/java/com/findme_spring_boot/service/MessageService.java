@@ -11,16 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class MessageService {
     private MessageDAO messageDAO;
     private RelationshipService relationshipService;
+    private UserService userService;
 
     @Autowired
-    public MessageService(MessageDAO messageDAO, RelationshipService relationshipService) {
+    public MessageService(MessageDAO messageDAO, RelationshipService relationshipService, UserService userService) {
         this.messageDAO = messageDAO;
         this.relationshipService = relationshipService;
+        this.userService = userService;
     }
 
     public Message save(Message message, User authUser) throws Exception {
@@ -53,6 +56,14 @@ public class MessageService {
         }
 
         return message;
+    }
+
+    public int getCountIncomeMessages(User authUser) throws Exception {
+        return messageDAO.getCountIncomeMessages(authUser.getId());
+    }
+
+    public List<Message> getMessagesBetweenUsers(String userFromId, User authUser) throws Exception {
+        return messageDAO.getMessagesBetweenUsers(userService.parseUserId(userFromId), authUser.getId());
     }
 
     private Long parseMessageId(String id) throws BadRequestException {

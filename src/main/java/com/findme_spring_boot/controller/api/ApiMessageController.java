@@ -27,8 +27,13 @@ public class ApiMessageController {
         return messageService.update(message, (User) session.getAttribute("USER"));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/message/delete/{messageId}")
+    @DeleteMapping(value = "/message/delete/{messageId}")
     public void delete(@PathVariable String messageId, HttpSession session) throws Exception {
         messageService.delete(messageId, (User) session.getAttribute("USER"));
+    }
+
+    @GetMapping(value = "/messages/count")
+    public int getCount(HttpSession session) throws Exception {
+        return messageService.getCountIncomeMessages((User) session.getAttribute("USER"));
     }
 }

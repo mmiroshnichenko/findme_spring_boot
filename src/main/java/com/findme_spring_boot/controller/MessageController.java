@@ -27,4 +27,11 @@ public class MessageController {
         model.addAttribute("message", messageService.get(messageId, (User) session.getAttribute("USER")));
         return "message";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/messages/{userFromId}", produces = "text/plain")
+    public @ResponseBody
+    String getMessagesFromUser(Model model, @PathVariable String userFromId, HttpSession session) throws Exception {
+        model.addAttribute("messages", messageService.getMessagesBetweenUsers(userFromId, (User) session.getAttribute("USER")));
+        return "messages";
+    }
 }
