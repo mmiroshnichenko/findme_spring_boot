@@ -3,17 +3,17 @@ package com.findme_spring_boot.service;
 import com.findme_spring_boot.dao.oracle.MessageDAO;
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.NotFoundException;
-import com.findme_spring_boot.model.oracle.Message;
-import com.findme_spring_boot.model.oracle.Relationship;
-import com.findme_spring_boot.model.oracle.RelationshipStatus;
-import com.findme_spring_boot.model.oracle.User;
+import com.findme_spring_boot.model.oracle.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class MessageService {
     private MessageDAO messageDAO;
     private RelationshipService relationshipService;
@@ -47,6 +47,16 @@ public class MessageService {
         messageDAO.update(message);
     }
 
+    public void deleteMessagesWithUser(String userId, User authUser) throws Exception {
+        messageDAO.deleteMessagesWithUser(userService.parseUserId(userId), authUser.getId());
+    }
+
+    public void deleteSomeMessages(String[] messagesIds, User authUser) throws Exception {
+        for (String messageId: messagesIds) {
+            delete(messageId, authUser);
+        }
+    }
+
     public Message get(String id, User authUser) throws Exception {
         Message message = findById(parseMessageId(id));
         validateReading(message, authUser);
@@ -62,8 +72,20 @@ public class MessageService {
         return messageDAO.getCountIncomeMessages(authUser.getId());
     }
 
-    public List<Message> getMessagesBetweenUsers(String userFromId, User authUser) throws Exception {
-        return messageDAO.getMessagesBetweenUsers(userService.parseUserId(userFromId), authUser.getId());
+    public List<Message> getMessagesBetweenUsers(String userId, User authUser, int start) throws Exception {
+        List<Message> messages = messageDAO.getMessagesBetweenUsers(userService.parseUserId(userId), authUser.getId(), start);
+        List<Long> messagesIds = new ArrayList<>();
+        for (Message message: messages) {
+            if (message.getUserTo().getId().equals(authUser.getId()) && message.getDateRead() == null) {
+                messagesIds.add(message.getId());
+            }
+        }
+
+        if (!messagesIds.isEmpty()) {
+            messageDAO.setDateReadForMessages(messagesIds);
+        }
+
+        return messages;
     }
 
     private Long parseMessageId(String id) throws BadRequestException {

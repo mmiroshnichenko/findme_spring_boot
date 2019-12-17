@@ -5,10 +5,7 @@ import com.findme_spring_boot.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,10 +25,10 @@ public class MessageController {
         return "message";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/messages/{userFromId}", produces = "text/plain")
+    @RequestMapping(method = RequestMethod.GET, value = "/messages/{userId}", produces = "text/plain")
     public @ResponseBody
-    String getMessagesFromUser(Model model, @PathVariable String userFromId, HttpSession session) throws Exception {
-        model.addAttribute("messages", messageService.getMessagesBetweenUsers(userFromId, (User) session.getAttribute("USER")));
+    String getMessagesWithUser(Model model, @PathVariable String userId, HttpSession session, @RequestParam(value = "start", required = false, defaultValue = "0") int start) throws Exception {
+        model.addAttribute("messages", messageService.getMessagesBetweenUsers(userId, (User) session.getAttribute("USER"), start));
         return "messages";
     }
 }
