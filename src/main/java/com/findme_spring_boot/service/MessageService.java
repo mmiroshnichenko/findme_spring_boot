@@ -6,14 +6,12 @@ import com.findme_spring_boot.exception.NotFoundException;
 import com.findme_spring_boot.model.oracle.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
-@Transactional
 public class MessageService {
     private MessageDAO messageDAO;
     private RelationshipService relationshipService;
