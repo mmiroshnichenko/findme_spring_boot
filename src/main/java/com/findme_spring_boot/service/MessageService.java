@@ -3,6 +3,7 @@ package com.findme_spring_boot.service;
 import com.findme_spring_boot.dao.oracle.MessageDAO;
 import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.NotFoundException;
+import com.findme_spring_boot.exception.api.ApiBadRequestException;
 import com.findme_spring_boot.model.oracle.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,9 @@ public class MessageService {
     }
 
     public void deleteSomeMessages(String[] messagesIds, User authUser) throws Exception {
+        if (messagesIds.length > 10) {
+            throw new ApiBadRequestException("Error: incorrect quantity of messages. Should be less 10");
+        }
         for (String messageId: messagesIds) {
             delete(messageId, authUser);
         }
