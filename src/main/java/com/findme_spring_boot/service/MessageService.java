@@ -54,11 +54,14 @@ public class MessageService {
         if (messagesIds.length > 10) {
             throw new ApiBadRequestException("Error: incorrect quantity of messages. Should be less 10");
         }
+
+        //TODO you should delete messages using ONE query
         for (String messageId: messagesIds) {
             delete(messageId, authUser);
         }
     }
 
+    //TODO naming is bad
     public Message get(String id, User authUser) throws Exception {
         Message message = findById(parseMessageId(id));
         validateReading(message, authUser);
@@ -75,6 +78,7 @@ public class MessageService {
     }
 
     public List<Message> getMessagesBetweenUsers(String userId, User authUser, int start) throws Exception {
+        //TODO you should use lazy load in messages. try to think how many info will be loaded from DB here
         List<Message> messages = messageDAO.getMessagesBetweenUsers(userService.parseUserId(userId), authUser.getId(), start);
         List<Long> messagesIds = new ArrayList<>();
         for (Message message: messages) {
@@ -83,6 +87,7 @@ public class MessageService {
             }
         }
 
+        //TODO didn't understand this logic, look very bad to many so many updates to the DB
         if (!messagesIds.isEmpty()) {
             messageDAO.setDateReadForMessages(messagesIds);
         }
@@ -90,6 +95,7 @@ public class MessageService {
         return messages;
     }
 
+    //TODO method can be moved to Utils, as you do the same a few times in the project
     private Long parseMessageId(String id) throws BadRequestException {
         try {
             long paramId = Long.parseLong(id);
@@ -119,6 +125,7 @@ public class MessageService {
     }
 
     private void validateReading(Message message, User authUser) throws Exception {
+        //TODO you should not create separate method for 2 lines of logic
         if (!message.getUserFrom().getId().equals(authUser.getId()) && !message.getUserTo().getId().equals(authUser.getId())) {
             throw new BadRequestException("Error: you cannot read this message");
         }
@@ -136,6 +143,7 @@ public class MessageService {
         checkAuthor(message, authUser);
 
         Relationship relationship = relationshipService.getRelationshipBetweenUsers(message.getUserFrom().getId(), message.getUserTo().getId());
+        //TODO you don't need to load relationship from DB. here just check if it exists of now needed
         if (relationship == null || !relationship.getRelationshipStatus().equals(RelationshipStatus.CONFIRMED)) {
             throw new BadRequestException("Error: you can send message only to friends");
         }

@@ -35,6 +35,8 @@ public class MessageDAOImpl extends BaseDAOImpl<Message> implements MessageDAO {
 
             return ((Number) query.getSingleResult()).intValue();
         } catch (Exception e) {
+            //TODO whould be good to write handler which catch Exception in this class and wraps it to InternalServerException
+            //because this logic is repeated every time here
             throw new InternalServerException(e.getMessage());
         }
 
