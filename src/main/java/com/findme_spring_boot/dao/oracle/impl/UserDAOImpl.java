@@ -17,19 +17,15 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
        super(User.class);
     }
 
-    public int countUsersWithEmailOrPhone(String email, String phone) throws InternalServerException {
-        try {
-            Query query = entityManager.createNativeQuery(SELECT_USER_DUBLICATE);
-            query.setParameter(1, email);
-            query.setParameter(2, phone);
+    public int countUsersWithEmailOrPhone(String email, String phone) {
+        Query query = entityManager.createNativeQuery(SELECT_USER_DUBLICATE);
+        query.setParameter(1, email);
+        query.setParameter(2, phone);
 
-            return ((Number) query.getSingleResult()).intValue();
-        } catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
-        }
+        return ((Number) query.getSingleResult()).intValue();
     }
 
-    public User getUserByEmailAndPassword(String email, String password) throws InternalServerException {
+    public User getUserByEmailAndPassword(String email, String password) {
         try {
             Query query = entityManager.createNativeQuery(SELECT_BY_EMAILS_PASSWORD, User.class);
             query.setParameter(1, email);
@@ -38,8 +34,6 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
             return (User) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
-        } catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
         }
 
     }

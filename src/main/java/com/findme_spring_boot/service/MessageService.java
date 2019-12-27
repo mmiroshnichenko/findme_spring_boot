@@ -5,6 +5,7 @@ import com.findme_spring_boot.exception.BadRequestException;
 import com.findme_spring_boot.exception.NotFoundException;
 import com.findme_spring_boot.exception.api.ApiBadRequestException;
 import com.findme_spring_boot.model.oracle.*;
+import com.findme_spring_boot.util.ParserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +18,14 @@ public class MessageService {
     private MessageDAO messageDAO;
     private RelationshipService relationshipService;
     private UserService userService;
+    private ParserUtil parserUtil;
 
     @Autowired
-    public MessageService(MessageDAO messageDAO, RelationshipService relationshipService, UserService userService) {
+    public MessageService(MessageDAO messageDAO, RelationshipService relationshipService, UserService userService, ParserUtil parserUtil) {
         this.messageDAO = messageDAO;
         this.relationshipService = relationshipService;
         this.userService = userService;
+        this.parserUtil = parserUtil;
     }
 
     public Message save(Message message, User authUser) throws Exception {
@@ -39,7 +42,7 @@ public class MessageService {
     }
 
     public void delete(String id, User authUser) throws Exception {
-        Message message = findById(parseMessageId(id));
+        Message message = findById(parserUtil.parseId(id));
         validateDeleting(message, authUser);
 
         message.setDateDeleted(new Date());
@@ -54,14 +57,19 @@ public class MessageService {
         if (messagesIds.length > 10) {
             throw new ApiBadRequestException("Error: incorrect quantity of messages. Should be less 10");
         }
+        List<Long> msgIds = new ArrayList<>();
         for (String messageId: messagesIds) {
-            delete(messageId, authUser);
+            msgIds.add(parserUtil.parseId(messageId));
         }
+
+        messageDAO.deleteSomeMessages(msgIds);
     }
 
-    public Message get(String id, User authUser) throws Exception {
-        Message message = findById(parseMessageId(id));
-        validateReading(message, authUser);
+    public Message getMessage(String id, User authUser) throws Exception {
+        Message message = findById(parserUtil.parseId(id));
+        if (!message.getUserFrom().getId().equals(authUser.getId()) && !message.getUserTo().getId().equals(authUser.getId())) {
+            throw new BadRequestException("Error: you cannot read this message");
+        }
         if (message.getUserTo().getId().equals(authUser.getId()) && message.getDateRead() == null) {
             message.setDateRead(new Date());
             messageDAO.update(message);
@@ -90,19 +98,6 @@ public class MessageService {
         return messages;
     }
 
-    private Long parseMessageId(String id) throws BadRequestException {
-        try {
-            long paramId = Long.parseLong(id);
-            if (paramId <= 0) {
-                throw new BadRequestException("Error: incorrect message id: " + id);
-            }
-
-            return paramId;
-        } catch (NumberFormatException e) {
-            throw new BadRequestException("Error: incorrect message id format");
-        }
-    }
-
     private Message findById(long id) throws Exception {
         Message message = messageDAO.findById(id);
         if (message == null) {
@@ -115,12 +110,6 @@ public class MessageService {
     private void checkAuthor(Message message, User authUser) throws Exception {
         if (!message.getUserFrom().getId().equals(authUser.getId())) {
             throw new BadRequestException("Error: you cannot update this message");
-        }
-    }
-
-    private void validateReading(Message message, User authUser) throws Exception {
-        if (!message.getUserFrom().getId().equals(authUser.getId()) && !message.getUserTo().getId().equals(authUser.getId())) {
-            throw new BadRequestException("Error: you cannot read this message");
         }
     }
 

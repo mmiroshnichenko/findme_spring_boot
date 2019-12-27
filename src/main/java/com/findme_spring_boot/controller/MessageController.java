@@ -21,7 +21,7 @@ public class MessageController {
     @RequestMapping(method = RequestMethod.GET, value = "/message/get/{messageId}", produces = "text/plain")
     public @ResponseBody
     String get(Model model, @PathVariable String messageId, HttpSession session) throws Exception {
-        model.addAttribute("message", messageService.get(messageId, (User) session.getAttribute("USER")));
+        model.addAttribute("message", messageService.getMessage(messageId, (User) session.getAttribute("USER")));
         return "message";
     }
 

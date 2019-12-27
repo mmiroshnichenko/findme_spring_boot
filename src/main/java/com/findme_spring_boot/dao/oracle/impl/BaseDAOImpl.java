@@ -1,8 +1,6 @@
 package com.findme_spring_boot.dao.oracle.impl;
 
 import com.findme_spring_boot.dao.oracle.BaseDAO;
-import com.findme_spring_boot.exception.InternalServerException;
-import com.findme_spring_boot.exception.api.ApiInternalServerException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -19,38 +17,22 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
         this.typeOfT = typeOfT;
     }
 
-    public T save(T object) throws ApiInternalServerException {
-        try {
-            entityManager.persist(object);
-            return object;
-        } catch (Exception e) {
-            throw new ApiInternalServerException(e.getMessage());
-        }
+    public T save(T object) {
+        entityManager.persist(object);
+        return object;
     }
 
-    public T update(T object) throws ApiInternalServerException {
-        try {
-            entityManager.merge(object);
+    public T update(T object) {
+        entityManager.merge(object);
 
-            return object;
-        } catch (Exception e) {
-            throw new ApiInternalServerException(e.getMessage());
-        }
+        return object;
     }
 
-    public void delete(T object) throws ApiInternalServerException {
-        try {
-            entityManager.remove(object);
-        } catch (Exception e) {
-            throw new ApiInternalServerException(e.getMessage());
-        }
+    public void delete(T object) {
+        entityManager.remove(object);
     }
 
-    public T findById(long id) throws InternalServerException {
-        try {
-            return entityManager.find(this.typeOfT, id);
-        } catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
-        }
+    public T findById(long id) {
+        return entityManager.find(this.typeOfT, id);
     }
 }

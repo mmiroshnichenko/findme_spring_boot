@@ -1,6 +1,5 @@
 package com.findme_spring_boot.dao.oracle.impl;
 
-import com.findme_spring_boot.exception.InternalServerException;
 import com.findme_spring_boot.dao.oracle.RelationshipDAO;
 import com.findme_spring_boot.model.oracle.Relationship;
 import com.findme_spring_boot.model.oracle.RelationshipStatus;
@@ -34,7 +33,7 @@ public class RelationshipDAOImpl extends BaseDAOImpl<Relationship> implements Re
         super(Relationship.class);
     }
 
-    public Relationship getExistRelationship(Long userFromId, Long userToId) throws InternalServerException{
+    public Relationship getExistRelationship(Long userFromId, Long userToId) {
         try {
             Query query = entityManager.createNativeQuery(SELECT_EXIST_RELATIONSHIP, Relationship.class);
             query.setParameter(1, userFromId);
@@ -43,70 +42,45 @@ public class RelationshipDAOImpl extends BaseDAOImpl<Relationship> implements Re
             return (Relationship) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
-        }  catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
         }
     }
 
-    public List<Relationship> getRelationshipsForUser(Long userId) throws InternalServerException {
-        try {
-            Query query = entityManager.createNativeQuery(SELECT_RELATIONSHIPS_FOR_USER, Relationship.class);
-            query.setParameter(1, userId);
+    public List<Relationship> getRelationshipsForUser(Long userId) {
+        Query query = entityManager.createNativeQuery(SELECT_RELATIONSHIPS_FOR_USER, Relationship.class);
+        query.setParameter(1, userId);
 
-            return query.getResultList();
-        } catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
-        }
+        return query.getResultList();
     }
 
-    public List<Relationship> getIncomeRequests(Long userId) throws InternalServerException {
-        try {
-            Query query = entityManager.createNativeQuery(SELECT_INCOME_REQ, Relationship.class);
-            query.setParameter(1, userId);
-            query.setParameter(2, RelationshipStatus.REQUESTED.toString());
+    public List<Relationship> getIncomeRequests(Long userId) {
+        Query query = entityManager.createNativeQuery(SELECT_INCOME_REQ, Relationship.class);
+        query.setParameter(1, userId);
+        query.setParameter(2, RelationshipStatus.REQUESTED.toString());
 
-            return query.getResultList();
-        } catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
-        }
-
+        return query.getResultList();
     }
 
-    public List<Relationship> getOutcomeRequests(Long userId) throws InternalServerException {
-        try {
-            Query query = entityManager.createNativeQuery(SELECT_OUTCOME_REQ, Relationship.class);
-            query.setParameter(1, userId);
-            query.setParameter(2, RelationshipStatus.REQUESTED.toString());
+    public List<Relationship> getOutcomeRequests(Long userId) {
+        Query query = entityManager.createNativeQuery(SELECT_OUTCOME_REQ, Relationship.class);
+        query.setParameter(1, userId);
+        query.setParameter(2, RelationshipStatus.REQUESTED.toString());
 
-            return query.getResultList();
-        } catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
-        }
-
+        return query.getResultList();
     }
 
-    public int getCountOutcomeRequests(Long userId) throws InternalServerException {
-        try {
-            Query query = entityManager.createNativeQuery(SELECT_COUNT_OUTCOME_REQUESTS);
-            query.setParameter(1, userId);
-            query.setParameter(2, RelationshipStatus.REQUESTED.toString());
+    public int getCountOutcomeRequests(Long userId) {
+        Query query = entityManager.createNativeQuery(SELECT_COUNT_OUTCOME_REQUESTS);
+        query.setParameter(1, userId);
+        query.setParameter(2, RelationshipStatus.REQUESTED.toString());
 
-            return ((Number) query.getSingleResult()).intValue();
-        } catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
-        }
-
+        return ((Number) query.getSingleResult()).intValue();
     }
 
-    public int getCountFriends(Long userId) throws InternalServerException {
-        try {
-            Query query = entityManager.createNativeQuery(SELECT_COUNT_FRIENDS);
-            query.setParameter(1, userId);
-            query.setParameter(2, RelationshipStatus.CONFIRMED.toString());
+    public int getCountFriends(Long userId) {
+        Query query = entityManager.createNativeQuery(SELECT_COUNT_FRIENDS);
+        query.setParameter(1, userId);
+        query.setParameter(2, RelationshipStatus.CONFIRMED.toString());
 
-            return ((Number) query.getSingleResult()).intValue();
-        } catch (Exception e) {
-            throw new InternalServerException(e.getMessage());
-        }
+        return ((Number) query.getSingleResult()).intValue();
     }
 }
