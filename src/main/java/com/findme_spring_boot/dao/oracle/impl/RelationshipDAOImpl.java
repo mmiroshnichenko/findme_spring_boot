@@ -14,6 +14,9 @@ public class RelationshipDAOImpl extends BaseDAOImpl<Relationship> implements Re
     private static final String SELECT_EXIST_RELATIONSHIP = "SELECT * FROM RELATIONSHIP " +
             "WHERE (USER_FROM_ID = ?1 AND USER_TO_ID = ?2) OR (USER_FROM_ID = ?2 AND USER_TO_ID = ?1)";
 
+    private static final String SELECT_COUNT_CONFIRMED_RELATIONSHIP = "SELECT COUNT(*) FROM RELATIONSHIP " +
+            "WHERE (USER_FROM_ID = ?1 AND USER_TO_ID = ?2) OR (USER_FROM_ID = ?2 AND USER_TO_ID = ?1) AND STATUS = ?3";
+
     private static final String SELECT_RELATIONSHIPS_FOR_USER = "SELECT * FROM RELATIONSHIP " +
             "WHERE USER_FROM_ID = ?1 OR USER_TO_ID = ?1";
 
@@ -43,6 +46,15 @@ public class RelationshipDAOImpl extends BaseDAOImpl<Relationship> implements Re
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public boolean existConfirmedRelationship(Long userFromId, Long userToId) {
+        Query query = entityManager.createNativeQuery(SELECT_COUNT_CONFIRMED_RELATIONSHIP);
+        query.setParameter(1, userFromId);
+        query.setParameter(2, userToId);
+        query.setParameter(3, RelationshipStatus.CONFIRMED.toString());
+
+        return ((Number) query.getSingleResult()).intValue() > 0;
     }
 
     public List<Relationship> getRelationshipsForUser(Long userId) {

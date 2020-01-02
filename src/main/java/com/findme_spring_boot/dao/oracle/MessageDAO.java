@@ -1,7 +1,6 @@
 package com.findme_spring_boot.dao.oracle;
 
 import com.findme_spring_boot.model.oracle.Message;
-import com.findme_spring_boot.model.oracle.User;
 
 import java.util.List;
 

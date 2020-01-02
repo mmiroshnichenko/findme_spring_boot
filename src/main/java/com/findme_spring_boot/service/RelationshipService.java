@@ -53,6 +53,10 @@ public class RelationshipService {
         return relationshipDAO.getExistRelationship(user1Id, user2Id);
     }
 
+    public boolean existConfirmedRelationship(long user1Id, long user2Id) throws Exception {
+        return relationshipDAO.existConfirmedRelationship(user1Id, user2Id);
+    }
+
     private void validateUpdatedRelationship(Relationship relationship) throws Exception {
         Relationship dbRelationship = relationshipDAO.findById(relationship.getId());
         if (!relationship.getUserFrom().getId().equals(dbRelationship.getUserFrom().getId())) {

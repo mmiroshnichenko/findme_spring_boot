@@ -124,8 +124,7 @@ public class MessageService {
     private void validate(Message message, User authUser) throws Exception {
         checkAuthor(message, authUser);
 
-        Relationship relationship = relationshipService.getRelationshipBetweenUsers(message.getUserFrom().getId(), message.getUserTo().getId());
-        if (relationship == null || !relationship.getRelationshipStatus().equals(RelationshipStatus.CONFIRMED)) {
+        if (!relationshipService.existConfirmedRelationship(message.getUserFrom().getId(), message.getUserTo().getId())) {
             throw new BadRequestException("Error: you can send message only to friends");
         }
 

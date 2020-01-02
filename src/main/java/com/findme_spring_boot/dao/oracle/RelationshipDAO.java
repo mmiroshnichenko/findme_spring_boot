@@ -17,4 +17,6 @@ public interface RelationshipDAO extends BaseDAO<Relationship> {
     int getCountOutcomeRequests(Long userId);
 
     int getCountFriends(Long userId);
+
+    boolean existConfirmedRelationship(Long userFromId, Long userToId);
 }

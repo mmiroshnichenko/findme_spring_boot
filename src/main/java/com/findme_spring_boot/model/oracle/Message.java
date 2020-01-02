@@ -31,11 +31,11 @@ public class Message {
     @Column(name = "DATE_DELETED")
     private Date dateDeleted;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_FROM_ID", nullable = false)
     private User userFrom;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_TO_ID", nullable = false)
     private User userTo;
 }
